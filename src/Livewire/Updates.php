@@ -65,7 +65,7 @@ final class Updates extends Component
         InstalledPackageInspector $inspector,
         ComposerRunner $composer,
     ): void {
-        $this->ensureAuthorized();
+        $this->ensureAuthorized('updates.manage');
         $this->clearMessages();
 
         if (! $this->updatesAreEnabled()) {
@@ -183,7 +183,7 @@ final class Updates extends Component
         return $environments === [] || app()->environment(...$environments);
     }
 
-    private function ensureAuthorized(): void
+    private function ensureAuthorized(string $permission = 'updates.view'): void
     {
         $authorization = (array) config('nuewire.installer.ui.authorization', []);
         $guard = trim((string) ($authorization['guard'] ?? ''));
@@ -191,6 +191,20 @@ final class Updates extends Component
 
         if ((bool) ($authorization['require_authenticated_user'] ?? true) && ! $auth->check()) {
             abort(403);
+        }
+
+        $user = $auth->user();
+
+        if (app()->bound('nuewire.acl.enabled')) {
+            if ($user === null || ! method_exists($user, 'can')) {
+                abort(403);
+            }
+
+            try {
+                abort_unless($user->can($permission), 403);
+            } catch (Throwable) {
+                abort(403);
+            }
         }
 
         $gate = trim((string) ($authorization['gate'] ?? ''));

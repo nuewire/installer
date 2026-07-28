@@ -33,6 +33,8 @@ final class InstallCommand extends Command
             return self::FAILURE;
         }
 
+        $selected = $this->expandDependencies($selected, $features);
+
         $selected = array_values(array_filter(
             $selected,
             fn (string $id): bool => isset($features[$id])
@@ -132,6 +134,36 @@ final class InstallCommand extends Command
         }
 
         return multiselect($this->translate('select_features'), $options, $defaults);
+    }
+
+    /** @param array<int, string> $selected @param array<string, array<string, mixed>> $features @return array<int, string> */
+    private function expandDependencies(array $selected, array $features): array
+    {
+        $result = [];
+        $visiting = [];
+
+        $add = function (string $id) use (&$add, &$result, &$visiting, $features): void {
+            if (isset($result[$id]) || isset($visiting[$id]) || ! isset($features[$id])) {
+                return;
+            }
+
+            $visiting[$id] = true;
+
+            foreach ((array) ($features[$id]['requires_features'] ?? []) as $dependency) {
+                if (is_string($dependency)) {
+                    $add($dependency);
+                }
+            }
+
+            unset($visiting[$id]);
+            $result[$id] = true;
+        };
+
+        foreach ($selected as $id) {
+            $add($id);
+        }
+
+        return array_keys($result);
     }
 
     /** @param array<int, string> $features */

@@ -42,6 +42,7 @@ final class InstallerServiceProvider extends ServiceProvider
         }
 
         $this->registerPlatformNavigation();
+        $this->registerAclPermissions();
     }
 
     public function boot(): void
@@ -71,10 +72,8 @@ final class InstallerServiceProvider extends ServiceProvider
 
         $livewire = $this->app->make('livewire');
 
-        if (method_exists($livewire, 'addNamespace')) {
-            \Livewire\Livewire::resolveMissingComponent(
-                static fn (string $name): ?string => $name === 'nuewire::updates' ? Updates::class : null,
-            );
+        if (method_exists($livewire, 'addComponent')) {
+            $livewire->addComponent('nuewire::updates', null, Updates::class);
 
             return;
         }
@@ -100,9 +99,26 @@ final class InstallerServiceProvider extends ServiceProvider
                 'description' => ['id' => 'Periksa dan perbarui package.', 'en' => 'Check and update packages.'],
                 'group' => ['id' => 'Sistem', 'en' => 'System'],
                 'component' => 'nuewire::updates',
+                'permission' => 'updates.view',
                 'icon' => 'U',
                 'order' => 900,
             ]);
+        });
+    }
+
+    private function registerAclPermissions(): void
+    {
+        $registryClass = 'Nuewire\Acl\Registry\PermissionRegistry';
+
+        $this->app->afterResolving($registryClass, static function (object $registry): void {
+            if (! method_exists($registry, 'registerMany')) {
+                return;
+            }
+
+            $registry->registerMany([
+                'updates.view' => ['id' => 'Melihat pembaruan package', 'en' => 'View package updates'],
+                'updates.manage' => ['id' => 'Menjalankan pembaruan package', 'en' => 'Run package updates'],
+            ], 'installer');
         });
     }
 }

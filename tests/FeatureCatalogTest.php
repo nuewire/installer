@@ -12,14 +12,14 @@ final class FeatureCatalogTest extends TestCase
     {
         $features = app(FeatureCatalog::class)->all('id');
 
-        $this->assertSame(['platform', 'filesystem', 'mail'], array_keys($features));
+        $this->assertSame(['platform', 'users', 'acl', 'filesystem', 'mail'], array_keys($features));
         $this->assertSame('nuewire/mail', $features['mail']['package']);
     }
     public function test_installer_is_included_in_managed_packages(): void
     {
         $features = app(FeatureCatalog::class)->managed('id');
 
-        $this->assertSame(['installer', 'platform', 'filesystem', 'mail'], array_keys($features));
+        $this->assertSame(['installer', 'platform', 'users', 'acl', 'filesystem', 'mail'], array_keys($features));
         $this->assertSame('nuewire/installer', $features['installer']['package']);
     }
 

@@ -20,7 +20,7 @@ php artisan nuewire:update
 Non-interactive use:
 
 ```bash
-php artisan nuewire:install --feature=platform --feature=filesystem --no-interaction
+php artisan nuewire:install --feature=platform --feature=users --feature=filesystem --no-interaction
 php artisan nuewire:update --all --patch-only --no-interaction
 ```
 
@@ -33,6 +33,27 @@ composer dump-autoload
 php artisan package:discover --ansi
 php artisan optimize:clear
 ```
+
+## Users and ACL
+
+The bundled catalog includes:
+
+```text
+Platform
+Users
+ACL
+Filesystem
+Mail
+```
+
+Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. After Composer finishes, add the required traits to the host `User` model and run:
+
+```bash
+php artisan nuewire:users:install --migrate --admin=admin@example.com
+php artisan nuewire:acl:install --user=admin@example.com
+```
+
+Without ACL, the Users page uses `is_admin`. After ACL is initialized, the same page switches to Spatie roles and permissions.
 
 ## Add a feature
 

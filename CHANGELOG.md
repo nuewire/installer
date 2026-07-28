@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+- Add Users and ACL feature definitions.
+- Resolve feature dependencies and setup commands.
+- Register package update permissions.
+
 ## 1.1.0
 
 - Added the optional Livewire package update page.

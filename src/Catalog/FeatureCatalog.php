@@ -32,6 +32,8 @@ final class FeatureCatalog
                 'label' => $id,
                 'description' => '',
                 'recommended' => false,
+                'requires_features' => [],
+                'setup_command' => null,
                 'order' => 100,
             ], $feature, [
                 'id' => $id,

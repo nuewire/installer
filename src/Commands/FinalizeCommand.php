@@ -30,6 +30,16 @@ final class FinalizeCommand extends Command
             return self::FAILURE;
         }
 
+        foreach ((array) $this->option('feature') as $feature) {
+            $command = config('nuewire.installer.features.'.$feature.'.setup_command');
+
+            if (is_string($command) && $command !== '' && $this->getApplication()?->has($command)) {
+                if ($this->call($command) !== self::SUCCESS) {
+                    return self::FAILURE;
+                }
+            }
+        }
+
         $this->components->info($this->translate('ready'));
 
         return self::SUCCESS;

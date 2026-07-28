@@ -91,6 +91,8 @@ final class RemoteCatalog
                 'label' => is_array($feature['label'] ?? null) ? $feature['label'] : ['id' => $id, 'en' => $id],
                 'description' => is_array($feature['description'] ?? null) ? $feature['description'] : ['id' => '', 'en' => ''],
                 'recommended' => (bool) ($feature['recommended'] ?? false),
+                'requires_features' => array_values(array_filter((array) ($feature['requires_features'] ?? []), static fn (mixed $dependency): bool => is_string($dependency) && preg_match('/^[a-z0-9][a-z0-9-]*$/', $dependency) === 1)),
+                'setup_command' => is_string($feature['setup_command'] ?? null) && preg_match('/^nuewire:[a-z0-9:-]+$/', $feature['setup_command']) === 1 ? $feature['setup_command'] : null,
                 'order' => (int) ($feature['order'] ?? 100),
             ];
         }
