@@ -1,0 +1,56 @@
+{
+    "name": "btekno/installer",
+    "description": "Interactive installer and updater for Btekno Laravel packages.",
+    "keywords": [
+        "laravel",
+        "installer",
+        "composer",
+        "artisan",
+        "btekno"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Btekno"
+        }
+    ],
+    "require": {
+        "composer-runtime-api": "^2.2",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/filesystem": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "laravel/prompts": "^0.1.18|^0.2.0|^0.3.17",
+        "php": "^8.2",
+        "psr/log": "^1.1|^2.0|^3.0",
+        "symfony/process": "^7.0|^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Btekno\\Installer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Btekno\\Installer\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Btekno\\Installer\\InstallerServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,15 @@
+{
+    "schema": 1,
+    "generated_at": "2026-07-28T00:00:00Z",
+    "features": [
+        {
+            "id": "queue",
+            "package": "btekno/queue",
+            "constraint": "^1.0",
+            "label": {"id": "Queue", "en": "Queue"},
+            "description": {"id": "Konfigurasi queue.", "en": "Queue configuration."},
+            "recommended": false,
+            "order": 40
+        }
+    ]
+}
