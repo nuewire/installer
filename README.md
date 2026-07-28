@@ -26,6 +26,14 @@ php artisan nuewire:update --all --patch-only --no-interaction
 
 Composer remains the source of truth. Commit `composer.json` and `composer.lock` after installation or update.
 
+After updating the installer package, clear Laravel's cached package metadata:
+
+```bash
+composer dump-autoload
+php artisan package:discover --ansi
+php artisan optimize:clear
+```
+
 ## Add a feature
 
 Add a definition to `config/nuewire/installer.php`:
