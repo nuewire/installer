@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Support;
+namespace Nuewire\Installer\Support;
 
 use Composer\InstalledVersions;
 use Throwable;

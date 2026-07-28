@@ -18,7 +18,7 @@ return [
     'update_failed' => 'Composer gagal memperbarui package.',
     'update_done' => 'Pembaruan selesai.',
     'patch_only_requires_composer' => 'Opsi --patch-only memerlukan Composer 2.8 atau lebih baru.',
-    'ready' => 'Btekno siap digunakan.',
+    'ready' => 'Nuewire siap digunakan.',
     'not_installed' => 'Tidak terpasang',
     'headers' => ['feature' => 'Fitur', 'package' => 'Package', 'version' => 'Versi', 'update' => 'Update'],
 ];

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Commands;
+namespace Nuewire\Installer\Commands;
 
-use Btekno\Installer\Catalog\FeatureCatalog;
-use Btekno\Installer\Concerns\TranslatesInstaller;
-use Btekno\Installer\Composer\ComposerRunner;
-use Btekno\Installer\Support\InstalledPackageInspector;
+use Nuewire\Installer\Catalog\FeatureCatalog;
+use Nuewire\Installer\Concerns\TranslatesInstaller;
+use Nuewire\Installer\Composer\ComposerRunner;
+use Nuewire\Installer\Support\InstalledPackageInspector;
 use Illuminate\Console\Command;
 use Throwable;
 
 final class StatusCommand extends Command
 {
     use TranslatesInstaller;
-    protected $signature = 'btekno:status {--updates : Check available updates}';
-    protected $description = 'Show Btekno package status';
+    protected $signature = 'nuewire:status {--updates : Check available updates}';
+    protected $description = 'Show Nuewire package status';
 
     public function handle(FeatureCatalog $catalog, InstalledPackageInspector $installed, ComposerRunner $composer): int
     {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Commands;
+namespace Nuewire\Installer\Commands;
 
-use Btekno\Installer\Catalog\FeatureCatalog;
-use Btekno\Installer\Concerns\TranslatesInstaller;
-use Btekno\Installer\Composer\ComposerRunner;
+use Nuewire\Installer\Catalog\FeatureCatalog;
+use Nuewire\Installer\Concerns\TranslatesInstaller;
+use Nuewire\Installer\Composer\ComposerRunner;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 use Throwable;
@@ -19,9 +19,9 @@ final class UpdateCommand extends Command
 {
     use TranslatesInstaller;
 
-    protected $signature = 'btekno:update {--feature=* : Feature ID} {--all : Update all available packages} {--patch-only : Only patch updates} {--dry-run : Simulate Composer}';
+    protected $signature = 'nuewire:update {--feature=* : Feature ID} {--all : Update all available packages} {--patch-only : Only patch updates} {--dry-run : Simulate Composer}';
 
-    protected $description = 'Update installed Btekno packages';
+    protected $description = 'Update installed Nuewire packages';
 
     public function handle(FeatureCatalog $catalog, ComposerRunner $composer): int
     {
@@ -154,7 +154,7 @@ final class UpdateCommand extends Command
     /** @param array<int, string> $features */
     private function runFinalize(array $features): int
     {
-        $arguments = [PHP_BINARY, base_path('artisan'), 'btekno:finalize', '--no-interaction'];
+        $arguments = [PHP_BINARY, base_path('artisan'), 'nuewire:finalize', '--no-interaction'];
 
         foreach ($features as $feature) {
             $arguments[] = '--feature='.$feature;

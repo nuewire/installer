@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Composer;
+namespace Nuewire\Installer\Composer;
 
 use Illuminate\Contracts\Config\Repository;
 use JsonException;
@@ -66,7 +66,7 @@ final class ComposerRunner
     /** @return array<string, array<string, mixed>> */
     public function outdated(bool $patchOnly = false): array
     {
-        $arguments = ['outdated', 'btekno/*', '--direct', '--format=json', '--no-ansi'];
+        $arguments = ['outdated', 'nuewire/*', '--direct', '--format=json', '--no-ansi'];
 
         if ($patchOnly) {
             $arguments[] = '--patch-only';
@@ -89,7 +89,7 @@ final class ComposerRunner
         $result = [];
 
         foreach ((array) ($decoded['installed'] ?? []) as $package) {
-            if (! is_array($package) || ! str_starts_with((string) ($package['name'] ?? ''), 'btekno/')) {
+            if (! is_array($package) || ! str_starts_with((string) ($package['name'] ?? ''), 'nuewire/')) {
                 continue;
             }
 
@@ -102,7 +102,7 @@ final class ComposerRunner
     /** @return array<int, string> */
     private function binary(): array
     {
-        $configured = trim((string) $this->config->get('btekno.installer.composer_binary'));
+        $configured = trim((string) $this->config->get('nuewire.installer.composer_binary'));
 
         if ($configured !== '') {
             return str_ends_with(strtolower($configured), '.phar') ? [PHP_BINARY, $configured] : [$configured];

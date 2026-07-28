@@ -1,38 +1,38 @@
-# Btekno Installer
+# Nuewire Installer
 
-Install and update Btekno packages from one Artisan command.
+Install and update Nuewire packages from one Artisan command.
 
 ## Install
 
 ```bash
-composer require --dev btekno/installer
-php artisan btekno:install
+composer require --dev nuewire/installer
+php artisan nuewire:install
 ```
 
 Commands:
 
 ```bash
-php artisan btekno:install
-php artisan btekno:status --updates
-php artisan btekno:update
+php artisan nuewire:install
+php artisan nuewire:status --updates
+php artisan nuewire:update
 ```
 
 Non-interactive use:
 
 ```bash
-php artisan btekno:install --feature=platform --feature=filesystem --no-interaction
-php artisan btekno:update --all --patch-only --no-interaction
+php artisan nuewire:install --feature=platform --feature=filesystem --no-interaction
+php artisan nuewire:update --all --patch-only --no-interaction
 ```
 
 Composer remains the source of truth. Commit `composer.json` and `composer.lock` after installation or update.
 
 ## Add a feature
 
-Add a definition to `config/btekno/installer.php`:
+Add a definition to `config/nuewire/installer.php`:
 
 ```php
 'queue' => [
-    'package' => 'btekno/queue',
+    'package' => 'nuewire/queue',
     'constraint' => '^1.0',
     'label' => ['id' => 'Queue', 'en' => 'Queue'],
     'description' => ['id' => 'Konfigurasi queue.', 'en' => 'Queue configuration.'],
@@ -41,7 +41,7 @@ Add a definition to `config/btekno/installer.php`:
 ],
 ```
 
-An optional signed remote catalog can be enabled with `BTEKNO_CATALOG_ENABLED`, `BTEKNO_CATALOG_URL`, and `BTEKNO_CATALOG_PUBLIC_KEY`.
+An optional signed remote catalog can be enabled with `NUEWIRE_CATALOG_ENABLED`, `NUEWIRE_CATALOG_URL`, and `NUEWIRE_CATALOG_PUBLIC_KEY`.
 
 ## Kompatibilitas Composer
 

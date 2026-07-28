@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Commands;
+namespace Nuewire\Installer\Commands;
 
-use Btekno\Installer\Concerns\TranslatesInstaller;
+use Nuewire\Installer\Concerns\TranslatesInstaller;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -12,13 +12,13 @@ final class FinalizeCommand extends Command
 {
     use TranslatesInstaller;
 
-    protected $signature = 'btekno:finalize {--feature=* : Installed or updated feature}';
+    protected $signature = 'nuewire:finalize {--feature=* : Installed or updated feature}';
 
-    protected $description = 'Finalize Btekno package changes';
+    protected $description = 'Finalize Nuewire package changes';
 
     public function handle(Filesystem $files): int
     {
-        $directory = storage_path('app/private/.btekno');
+        $directory = storage_path('app/private/.nuewire');
 
         if (! $files->isDirectory($directory)) {
             $files->makeDirectory($directory, 0700, true, true);

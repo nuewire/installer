@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Tests;
+namespace Nuewire\Installer\Tests;
 
-use Btekno\Installer\InstallerServiceProvider;
+use Nuewire\Installer\InstallerServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra

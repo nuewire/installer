@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Concerns;
+namespace Nuewire\Installer\Concerns;
 
 use Illuminate\Support\Facades\Lang;
 
@@ -12,9 +12,9 @@ trait TranslatesInstaller
     private function translate(string $key, array $replace = []): string
     {
         return Lang::get(
-            "btekno-installer::installer.{$key}",
+            "nuewire-installer::installer.{$key}",
             $replace,
-            (string) config('btekno.installer.locale', 'id'),
+            (string) config('nuewire.installer.locale', 'id'),
         );
     }
 }

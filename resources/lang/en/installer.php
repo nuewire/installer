@@ -16,7 +16,7 @@ return [
     'update_unavailable' => 'Updates are not available for: :features',
     'update_failed' => 'Composer could not update the packages.',
     'update_done' => 'Update completed.',
-    'ready' => 'Btekno is ready.',
+    'ready' => 'Nuewire is ready.',
     'not_installed' => 'Not installed',
     'headers' => ['feature' => 'Feature', 'package' => 'Package', 'version' => 'Version', 'update' => 'Update'],
 ];

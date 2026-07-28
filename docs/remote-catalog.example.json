@@ -4,7 +4,7 @@
     "features": [
         {
             "id": "queue",
-            "package": "btekno/queue",
+            "package": "nuewire/queue",
             "constraint": "^1.0",
             "label": {"id": "Queue", "en": "Queue"},
             "description": {"id": "Konfigurasi queue.", "en": "Queue configuration."},

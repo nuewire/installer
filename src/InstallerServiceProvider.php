@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer;
+namespace Nuewire\Installer;
 
-use Btekno\Installer\Catalog\FeatureCatalog;
-use Btekno\Installer\Catalog\RemoteCatalog;
-use Btekno\Installer\Commands\FinalizeCommand;
-use Btekno\Installer\Commands\InstallCommand;
-use Btekno\Installer\Commands\StatusCommand;
-use Btekno\Installer\Commands\UpdateCommand;
-use Btekno\Installer\Composer\ComposerRunner;
-use Btekno\Installer\Support\InstalledPackageInspector;
+use Nuewire\Installer\Catalog\FeatureCatalog;
+use Nuewire\Installer\Catalog\RemoteCatalog;
+use Nuewire\Installer\Commands\FinalizeCommand;
+use Nuewire\Installer\Commands\InstallCommand;
+use Nuewire\Installer\Commands\StatusCommand;
+use Nuewire\Installer\Commands\UpdateCommand;
+use Nuewire\Installer\Composer\ComposerRunner;
+use Nuewire\Installer\Support\InstalledPackageInspector;
 use Illuminate\Support\ServiceProvider;
 
 final class InstallerServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->replaceConfigRecursivelyFrom(__DIR__.'/../config/btekno/installer.php', 'btekno.installer');
+        $this->replaceConfigRecursivelyFrom(__DIR__.'/../config/nuewire/installer.php', 'nuewire.installer');
         $this->app->singleton(RemoteCatalog::class);
         $this->app->singleton(FeatureCatalog::class);
         $this->app->singleton(InstalledPackageInspector::class);
@@ -27,17 +27,17 @@ final class InstallerServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'btekno-installer');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nuewire-installer');
         if ($this->app->runningInConsole()) {
             $this->commands([InstallCommand::class, StatusCommand::class, UpdateCommand::class, FinalizeCommand::class]);
         }
 
         $this->publishes([
-            __DIR__.'/../config/btekno/installer.php' => config_path('btekno/installer.php'),
-        ], 'btekno-installer-config');
+            __DIR__.'/../config/nuewire/installer.php' => config_path('nuewire/installer.php'),
+        ], 'nuewire-installer-config');
 
         $this->publishes([
-            __DIR__.'/../resources/lang' => lang_path('vendor/btekno-installer'),
-        ], 'btekno-installer-translations');
+            __DIR__.'/../resources/lang' => lang_path('vendor/nuewire-installer'),
+        ], 'nuewire-installer-translations');
     }
 }

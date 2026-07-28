@@ -1,18 +1,18 @@
 {
-    "name": "btekno/installer",
-    "description": "Interactive installer and updater for Btekno Laravel packages.",
+    "name": "nuewire/installer",
+    "description": "Interactive installer and updater for Nuewire Laravel packages.",
     "keywords": [
         "laravel",
         "installer",
         "composer",
         "artisan",
-        "btekno"
+        "nuewire"
     ],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Btekno"
+            "name": "Nuewire"
         }
     ],
     "require": {
@@ -33,18 +33,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Btekno\\Installer\\": "src/"
+            "Nuewire\\Installer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Btekno\\Installer\\Tests\\": "tests/"
+            "Nuewire\\Installer\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Btekno\\Installer\\InstallerServiceProvider"
+                "Nuewire\\Installer\\InstallerServiceProvider"
             ]
         }
     },

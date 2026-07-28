@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Catalog;
+namespace Nuewire\Installer\Catalog;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Client\Factory;
@@ -22,12 +22,12 @@ final class RemoteCatalog
     /** @return array<string, array<string, mixed>> */
     public function fetch(): array
     {
-        if (! (bool) $this->config->get('btekno.installer.remote_catalog.enabled', false)) {
+        if (! (bool) $this->config->get('nuewire.installer.remote_catalog.enabled', false)) {
             return [];
         }
 
-        $url = trim((string) $this->config->get('btekno.installer.remote_catalog.url'));
-        $publicKey = trim((string) $this->config->get('btekno.installer.remote_catalog.public_key'));
+        $url = trim((string) $this->config->get('nuewire.installer.remote_catalog.url'));
+        $publicKey = trim((string) $this->config->get('nuewire.installer.remote_catalog.public_key'));
 
         if ($url === '' || $publicKey === '') {
             return [];
@@ -40,12 +40,12 @@ final class RemoteCatalog
 
             $response = $this->http
                 ->acceptJson()
-                ->timeout((int) $this->config->get('btekno.installer.remote_catalog.timeout', 5))
+                ->timeout((int) $this->config->get('nuewire.installer.remote_catalog.timeout', 5))
                 ->get($url)
                 ->throw();
 
             $body = $response->body();
-            $signature = base64_decode((string) $response->header('X-Btekno-Signature'), true);
+            $signature = base64_decode((string) $response->header('X-Nuewire-Signature'), true);
             $key = base64_decode($publicKey, true);
 
             if ($signature === false || $key === false || ! sodium_crypto_sign_verify_detached($signature, $body, $key)) {
@@ -60,7 +60,7 @@ final class RemoteCatalog
 
             return $this->normalize($decoded['features']);
         } catch (Throwable $exception) {
-            $this->logger->warning('Btekno remote catalog could not be loaded. The bundled catalog is active.', [
+            $this->logger->warning('Nuewire remote catalog could not be loaded. The bundled catalog is active.', [
                 'exception' => $exception::class,
             ]);
 
@@ -81,7 +81,7 @@ final class RemoteCatalog
             $id = (string) ($feature['id'] ?? (is_string($key) ? $key : ''));
             $package = (string) ($feature['package'] ?? '');
 
-            if (! preg_match('/^[a-z0-9][a-z0-9-]*$/', $id) || ! str_starts_with($package, 'btekno/')) {
+            if (! preg_match('/^[a-z0-9][a-z0-9-]*$/', $id) || ! str_starts_with($package, 'nuewire/')) {
                 continue;
             }
 

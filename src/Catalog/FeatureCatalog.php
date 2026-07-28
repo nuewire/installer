@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Btekno\Installer\Catalog;
+namespace Nuewire\Installer\Catalog;
 
 use Illuminate\Contracts\Config\Repository;
 
@@ -17,12 +17,12 @@ final class FeatureCatalog
     /** @return array<string, array<string, mixed>> */
     public function all(?string $locale = null): array
     {
-        $locale ??= (string) $this->config->get('btekno.installer.locale', 'id');
-        $features = array_replace((array) $this->config->get('btekno.installer.features', []), $this->remote->fetch());
+        $locale ??= (string) $this->config->get('nuewire.installer.locale', 'id');
+        $features = array_replace((array) $this->config->get('nuewire.installer.features', []), $this->remote->fetch());
         $result = [];
 
         foreach ($features as $id => $feature) {
-            if (! is_string($id) || ! is_array($feature) || ! str_starts_with((string) ($feature['package'] ?? ''), 'btekno/')) {
+            if (! is_string($id) || ! is_array($feature) || ! str_starts_with((string) ($feature['package'] ?? ''), 'nuewire/')) {
                 continue;
             }
 
@@ -48,11 +48,11 @@ final class FeatureCatalog
     /** @return array<string, array<string, mixed>> */
     public function managed(?string $locale = null): array
     {
-        $locale ??= (string) $this->config->get('btekno.installer.locale', 'id');
-        $manager = (array) $this->config->get('btekno.installer.manager', []);
+        $locale ??= (string) $this->config->get('nuewire.installer.locale', 'id');
+        $manager = (array) $this->config->get('nuewire.installer.manager', []);
         $features = $this->all($locale);
 
-        if (str_starts_with((string) ($manager['package'] ?? ''), 'btekno/')) {
+        if (str_starts_with((string) ($manager['package'] ?? ''), 'nuewire/')) {
             $features = ['installer' => array_replace([
                 'id' => 'installer',
                 'constraint' => '',
