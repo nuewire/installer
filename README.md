@@ -34,6 +34,10 @@ php artisan package:discover --ansi
 php artisan optimize:clear
 ```
 
+## Core support package
+
+`nuewire/support` is installed as a Composer dependency, not as a selectable feature. It contains the reusable random integer ID trait, shared Nuewire paths, and Livewire component registration helpers. It also appears on the status and update pages when installed.
+
 ## Users and ACL
 
 The bundled catalog includes:

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nuewire\Installer\Commands;
 
+use Nuewire\Support\NuewirePaths;
 use Nuewire\Installer\Concerns\TranslatesInstaller;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -18,7 +19,7 @@ final class FinalizeCommand extends Command
 
     public function handle(Filesystem $files): int
     {
-        $directory = storage_path('app/private/.nuewire');
+        $directory = app(NuewirePaths::class)->privateDirectory();
 
         if (! $files->isDirectory($directory)) {
             $files->makeDirectory($directory, 0700, true, true);

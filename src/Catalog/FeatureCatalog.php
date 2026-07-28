@@ -52,7 +52,31 @@ final class FeatureCatalog
     {
         $locale ??= (string) $this->config->get('nuewire.installer.locale', 'id');
         $manager = (array) $this->config->get('nuewire.installer.manager', []);
+        $corePackages = (array) $this->config->get('nuewire.installer.core_packages', []);
         $features = $this->all($locale);
+        $core = [];
+
+        foreach ($corePackages as $id => $package) {
+            if (! is_string($id) || ! is_array($package) || ! str_starts_with((string) ($package['package'] ?? ''), 'nuewire/')) {
+                continue;
+            }
+
+            $core[$id] = array_replace([
+                'id' => $id,
+                'constraint' => '^1.0',
+                'label' => $id,
+                'description' => '',
+                'recommended' => false,
+                'order' => 5,
+            ], $package, [
+                'id' => $id,
+                'label' => $this->localize($package['label'] ?? $id, $locale),
+                'description' => $this->localize($package['description'] ?? '', $locale),
+            ]);
+        }
+
+        uasort($core, static fn (array $a, array $b): int => [(int) $a['order'], (string) $a['label']] <=> [(int) $b['order'], (string) $b['label']]);
+        $features = $core + $features;
 
         if (str_starts_with((string) ($manager['package'] ?? ''), 'nuewire/')) {
             $features = ['installer' => array_replace([

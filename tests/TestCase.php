@@ -6,12 +6,13 @@ namespace Nuewire\Installer\Tests;
 
 use Livewire\LivewireServiceProvider;
 use Nuewire\Installer\InstallerServiceProvider;
+use Nuewire\Support\SupportServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
     protected function getPackageProviders($app): array
     {
-        return [LivewireServiceProvider::class, InstallerServiceProvider::class];
+        return [SupportServiceProvider::class, LivewireServiceProvider::class, InstallerServiceProvider::class];
     }
 }

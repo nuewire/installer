@@ -31,7 +31,7 @@ final class StatusCommand extends Command
 
         $rows = [];
 
-        foreach ($catalog->all() as $feature) {
+        foreach ($catalog->managed() as $feature) {
             $package = (string) $feature['package'];
             $current = $installed->version($package);
             $latest = $updates[$package]['latest'] ?? null;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nuewire\Installer\Composer;
 
+use Nuewire\Support\NuewirePaths;
 use Illuminate\Contracts\Config\Repository;
 use JsonException;
 use RuntimeException;
@@ -141,7 +142,7 @@ final class ComposerRunner
             return $callback();
         }
 
-        $directory = storage_path('app/private/.nuewire');
+        $directory = app(NuewirePaths::class)->privateDirectory();
 
         if (! is_dir($directory) && ! @mkdir($directory, 0700, true) && ! is_dir($directory)) {
             throw new RuntimeException('Nuewire update lock directory could not be created.');

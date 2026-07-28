@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+- Added `nuewire/support` as a managed core package and shared path helpers.
+
 ## 1.2.0
 
 - Add Users and ACL feature definitions.

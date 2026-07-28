@@ -25,6 +25,16 @@ return [
         'order' => 0,
     ],
 
+    'core_packages' => [
+        'support' => [
+            'package' => 'nuewire/support',
+            'constraint' => '^1.0',
+            'label' => ['id' => 'Support', 'en' => 'Support'],
+            'description' => ['id' => 'Helper dan fondasi package.', 'en' => 'Shared package helpers.'],
+            'order' => 5,
+        ],
+    ],
+
     'remote_catalog' => [
         'enabled' => (bool) env('NUEWIRE_CATALOG_ENABLED', false),
         'url' => env('NUEWIRE_CATALOG_URL'),

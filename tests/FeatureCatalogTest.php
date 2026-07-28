@@ -19,8 +19,9 @@ final class FeatureCatalogTest extends TestCase
     {
         $features = app(FeatureCatalog::class)->managed('id');
 
-        $this->assertSame(['installer', 'platform', 'users', 'acl', 'filesystem', 'mail'], array_keys($features));
+        $this->assertSame(['installer', 'support', 'platform', 'users', 'acl', 'filesystem', 'mail'], array_keys($features));
         $this->assertSame('nuewire/installer', $features['installer']['package']);
+        $this->assertSame('nuewire/support', $features['support']['package']);
     }
 
 }

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Nuewire\Installer;
 
 use Illuminate\Support\ServiceProvider;
+use Nuewire\Support\LivewireComponentRegistrar;
+use Nuewire\Support\NuewirePaths;
 use Nuewire\Installer\Catalog\FeatureCatalog;
 use Nuewire\Installer\Catalog\RemoteCatalog;
 use Nuewire\Installer\Commands\FinalizeCommand;
@@ -47,38 +49,28 @@ final class InstallerServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $paths = $this->app->make(NuewirePaths::class);
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nuewire-installer');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nuewire-installer');
         $this->registerLivewireComponent();
 
         $this->publishes([
-            __DIR__.'/../config/nuewire/installer.php' => config_path('nuewire/installer.php'),
+            __DIR__.'/../config/nuewire/installer.php' => $paths->configFile('installer'),
         ], 'nuewire-installer-config');
 
         $this->publishes([
-            __DIR__.'/../resources/lang' => lang_path('vendor/nuewire/installer'),
+            __DIR__.'/../resources/lang' => $paths->publishedTranslations('installer'),
         ], 'nuewire-installer-translations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/nuewire/installer'),
+            __DIR__.'/../resources/views' => $paths->publishedViews('installer'),
         ], 'nuewire-installer-views');
     }
 
     private function registerLivewireComponent(): void
     {
-        if (! class_exists(\Livewire\Livewire::class) || ! $this->app->bound('livewire')) {
-            return;
-        }
-
-        $livewire = $this->app->make('livewire');
-
-        if (method_exists($livewire, 'addComponent')) {
-            $livewire->addComponent('nuewire::updates', null, Updates::class);
-
-            return;
-        }
-
-        \Livewire\Livewire::component('nuewire::updates', Updates::class);
+        $registrar = $this->app->make(LivewireComponentRegistrar::class);
+        $registrar->register('nuewire::updates', Updates::class);
     }
 
     private function registerPlatformNavigation(): void

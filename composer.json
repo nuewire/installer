@@ -27,6 +27,7 @@
         "illuminate/validation": "^11.0|^12.0|^13.0",
         "illuminate/view": "^11.0|^12.0|^13.0",
         "laravel/prompts": "^0.1.18|^0.2.0|^0.3.17",
+        "nuewire/support": "^1.0",
         "php": "^8.2",
         "psr/log": "^1.1|^2.0|^3.0",
         "symfony/process": "^7.0|^8.0"
