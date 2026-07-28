@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Publish translations to `lang/vendor/nuewire/installer`.
+
 ## 1.0.1
 
 - Register Artisan commands during the service provider registration phase.

@@ -55,7 +55,7 @@ final class InstallerServiceProvider extends ServiceProvider
         ], 'nuewire-installer-config');
 
         $this->publishes([
-            __DIR__.'/../resources/lang' => lang_path('vendor/nuewire-installer'),
+            __DIR__.'/../resources/lang' => lang_path('vendor/nuewire/installer'),
         ], 'nuewire-installer-translations');
     }
 }
