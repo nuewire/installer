@@ -54,3 +54,23 @@ An optional signed remote catalog can be enabled with `NUEWIRE_CATALOG_ENABLED`,
 ## Kompatibilitas Composer
 
 Instalasi dan update umum mendukung Composer 2.x. Opsi `--patch-only` memerlukan Composer 2.8 atau lebih baru.
+
+## Update page
+
+When `nuewire/platform` and Livewire are installed, the installer registers a **System > Updates** page. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
+
+The component can also be mounted directly:
+
+```blade
+<livewire:nuewire::updates />
+```
+
+```php
+'ui' => [
+    'allow_updates' => true,
+    'allowed_environments' => ['local'],
+    'authorization' => [
+        'gate' => 'manage-package-updates',
+    ],
+],
+```

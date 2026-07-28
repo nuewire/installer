@@ -76,6 +76,10 @@ final class UpdateCommand extends Command
 
         array_push($arguments, '--with-all-dependencies', '--no-interaction');
 
+        if ($composer->supportsMinimalChanges()) {
+            $arguments[] = '--minimal-changes';
+        }
+
         if ($this->option('patch-only')) {
             $arguments[] = '--patch-only';
         }

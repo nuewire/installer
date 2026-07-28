@@ -20,5 +20,15 @@ final class PublishPathTest extends TestCase
             lang_path('vendor/nuewire/installer'),
             array_values($paths),
         );
+
+        $viewPaths = ServiceProvider::pathsToPublish(
+            InstallerServiceProvider::class,
+            'nuewire-installer-views',
+        );
+
+        self::assertContains(
+            resource_path('views/vendor/nuewire/installer'),
+            array_values($viewPaths),
+        );
     }
 }

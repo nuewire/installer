@@ -6,6 +6,18 @@ return [
     'locale' => env('NUEWIRE_INSTALLER_LOCALE', 'id'),
     'composer_binary' => env('NUEWIRE_COMPOSER_BINARY'),
 
+    'ui' => [
+        'enabled' => (bool) env('NUEWIRE_INSTALLER_UI', true),
+        'allow_updates' => (bool) env('NUEWIRE_INSTALLER_UI_ALLOW_UPDATES', true),
+        'allowed_environments' => ['local'],
+        'process_timeout' => 600,
+        'authorization' => [
+            'require_authenticated_user' => true,
+            'gate' => env('NUEWIRE_INSTALLER_UI_GATE'),
+            'guard' => env('NUEWIRE_INSTALLER_UI_GUARD'),
+        ],
+    ],
+
     'manager' => [
         'package' => 'nuewire/installer',
         'label' => ['id' => 'Installer', 'en' => 'Installer'],

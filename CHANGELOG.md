@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Added the optional Livewire package update page.
+- Added local-environment web updates with fixed Composer arguments and authorization controls.
+
 ## 1.0.2
 
 - Publish translations to `lang/vendor/nuewire/installer`.
