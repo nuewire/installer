@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.0.0
+
+- Updated the bundled Platform constraint to `^2.0`.
+- Moved Updates to Plugin → Package Management.
+- Updated bundled path-repository release metadata for the contextual-navigation suite.
+
+## 1.6.0
+
+- Added the `nuewire/cache` feature with Platform dependency.
+- Added the `nuewire:cache:install` setup command to installer finalization.
+
+## 1.5.0
+
+- Added the `nuewire/backup` feature with Platform and Filesystem dependencies.
+- Added the `nuewire:backup:install` setup command to installer finalization.
+
+## 1.4.0
+
+- Added the `nuewire/logs` feature with Platform dependency and setup command.
+
 ## 1.3.0
 
 - Added `nuewire/support` as a managed core package and shared path helpers.

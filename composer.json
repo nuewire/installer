@@ -61,6 +61,6 @@
     "prefer-stable": true,
     "suggest": {
         "livewire/livewire": "Required for the optional web update interface.",
-        "nuewire/platform": "Adds the package update page to the Nuewire admin navigation."
+        "nuewire/platform": "Adds Updates under Plugin > Package Management in the Nuewire admin navigation."
     }
 }

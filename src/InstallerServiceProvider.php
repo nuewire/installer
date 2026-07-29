@@ -79,21 +79,37 @@ final class InstallerServiceProvider extends ServiceProvider
             return;
         }
 
-        $registryClass = 'Nuewire\\Platform\\Navigation\\NavigationRegistry';
+        $registryClass = 'Nuewire\Platform\Navigation\NavigationRegistry';
 
         $this->app->afterResolving($registryClass, static function (object $registry): void {
             if (! method_exists($registry, 'register')) {
                 return;
             }
 
-            $registry->register('updates', [
+            if (! method_exists($registry, 'registerArea')) {
+                $registry->register('updates', [
+                    'label' => ['id' => 'Pembaruan', 'en' => 'Updates'],
+                    'description' => ['id' => 'Periksa dan perbarui package.', 'en' => 'Check and update packages.'],
+                    'group' => ['id' => 'Sistem', 'en' => 'System'],
+                    'component' => 'nuewire::updates',
+                    'permission' => 'updates.view',
+                    'icon' => 'U',
+                    'order' => 900,
+                ]);
+
+                return;
+            }
+
+            $registry->register('installer.updates', [
+                'area' => 'plugin',
+                'group' => 'package-management',
+                'slug' => 'updates',
                 'label' => ['id' => 'Pembaruan', 'en' => 'Updates'],
                 'description' => ['id' => 'Periksa dan perbarui package.', 'en' => 'Check and update packages.'],
-                'group' => ['id' => 'Sistem', 'en' => 'System'],
                 'component' => 'nuewire::updates',
                 'permission' => 'updates.view',
-                'icon' => 'U',
-                'order' => 900,
+                'icon' => 'updates',
+                'order' => 10,
             ]);
         });
     }

@@ -48,9 +48,12 @@ Users
 ACL
 Filesystem
 Mail
+Platform Logs
+Backup
+Cache
 ```
 
-Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. After Composer finishes, add the required traits to the host `User` model and run:
+Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. Selecting **Platform Logs** also selects Platform and runs the Activitylog publishing step. Selecting **Backup** also selects Platform and Filesystem, then publishes the Spatie backup configuration. Selecting **Cache** also selects Platform and publishes the Nuewire Cache configuration. After Composer finishes, add the required traits to the host `User` model and run:
 
 ```bash
 php artisan nuewire:users:install --migrate --admin=admin@example.com
@@ -82,7 +85,7 @@ Instalasi dan update umum mendukung Composer 2.x. Opsi `--patch-only` memerlukan
 
 ## Update page
 
-When `nuewire/platform` and Livewire are installed, the installer registers a **System > Updates** page. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
+When `nuewire/platform` 2 and Livewire are installed, the installer registers **Plugin → Package Management → Updates** at `/admin/plugin/updates`. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
 
 The component can also be mounted directly:
 
