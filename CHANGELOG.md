@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.6.0 - 2026-07-29
+
+- Added the `nuewire/hero` and `nuewire/banner` features.
+- Hero and Banner installation resolve Platform, Filesystem, and Platform Logs dependencies.
+- Added automatic `nuewire:hero:install` and `nuewire:banner:install` finalization.
+
+## 2.5.0 - 2026-07-29
+
+- Added the `nuewire/media` feature.
+- Media installation now resolves Platform, Filesystem, and Platform Logs dependencies.
+- Added automatic `nuewire:media:install` finalization.
+
+## 2.4.0 - 2026-07-29
+
+- Added the `nuewire/unduhan` feature.
+- Downloads installation now resolves Platform, Filesystem, and Platform Logs dependencies.
+- Added automatic `nuewire:unduhan:install` finalization.
+
+## 2.3.0
+
+- Added the `nuewire/newsletter` feature with Platform and Mail dependencies.
+- Added setup finalization through `nuewire:newsletter:install`.
+- Added Newsletter package status and update coverage.
+
 ## 2.2.0
 
 - Added the `nuewire/page` feature with Platform dependency and setup command.

@@ -49,12 +49,15 @@ ACL
 Filesystem
 Mail
 Pages
+Downloads
+Media
+Newsletter
 Platform Logs
 Backup
 Cache
 ```
 
-Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. Selecting **Pages** also selects Platform and registers Content → Website → Pages. Run `php artisan migrate` followed by `php artisan nuewire:page:seed` when setup did not run migrations. Selecting **Platform Logs** also selects Platform and runs the Activitylog publishing step. Selecting **Backup** also selects Platform and Filesystem, then publishes the Spatie backup configuration. Selecting **Cache** also selects Platform and publishes the Nuewire Cache configuration. After Composer finishes, add the required traits to the host `User` model and run:
+Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. Selecting **Hero** and **Banner** also selects Platform, Filesystem, and Platform Logs, then registers Content → Website → Hero / Banner. Selecting **Pages** also selects Platform and registers Content → Website → Pages. Selecting **Downloads** also selects Platform, Filesystem, and Platform Logs, then registers Content → Downloads → Documents / Categories. Selecting **Media** also selects Platform, Filesystem, and Platform Logs, then registers Content → Media → Albums. Selecting **Newsletter** also selects Platform and Mail, then registers Plugin → Newsletter → Subscribers / Email Broadcasts. Run `php artisan migrate` when setup reports that Newsletter tables are not ready. Run `php artisan migrate` followed by `php artisan nuewire:page:seed` when setup did not run migrations. Selecting **Platform Logs** also selects Platform and runs the Activitylog publishing step. Selecting **Backup** also selects Platform and Filesystem, then publishes the Spatie backup configuration. Selecting **Cache** also selects Platform and publishes the Nuewire Cache configuration. After Composer finishes, add the required traits to the host `User` model and run:
 
 ```bash
 php artisan nuewire:users:install --migrate --admin=admin@example.com
