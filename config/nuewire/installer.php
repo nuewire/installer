@@ -45,7 +45,7 @@ return [
     'features' => [
         'platform' => [
             'package' => 'nuewire/platform',
-            'constraint' => '^2.0',
+            'constraint' => '^2.1',
             'label' => ['id' => 'Platform', 'en' => 'Platform'],
             'description' => ['id' => 'Layout dan navigasi admin.', 'en' => 'Admin layout and navigation.'],
             'recommended' => true,

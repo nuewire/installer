@@ -14,7 +14,7 @@ final class FeatureCatalogTest extends TestCase
 
         $this->assertSame(['platform', 'users', 'acl', 'filesystem', 'mail', 'logs', 'backup', 'cache'], array_keys($features));
         $this->assertSame('nuewire/platform', $features['platform']['package']);
-        $this->assertSame('^2.0', $features['platform']['constraint']);
+        $this->assertSame('^2.1', $features['platform']['constraint']);
         $this->assertSame('nuewire/mail', $features['mail']['package']);
         $this->assertSame('nuewire/logs', $features['logs']['package']);
         $this->assertSame(['platform'], $features['logs']['requires_features']);

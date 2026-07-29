@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+
+- Added package coverage and installed-version dashboard widgets.
+- Updated bundled package versions for the customizable-dashboard release.
+
 ## 2.0.1
 
 - Replaced Livewire `::` class aliases with portable flat aliases for Livewire 3 and 4.
