@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+- Replaced Livewire `::` class aliases with portable flat aliases for Livewire 3 and 4.
+- Updated the package update page alias to `nuewire-updates`.
+- Updated bundled path-repository release metadata for the compatibility fix.
+
 ## 2.0.0
 
 - Updated the bundled Platform constraint to `^2.0`.

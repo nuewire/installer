@@ -70,7 +70,7 @@ final class InstallerServiceProvider extends ServiceProvider
     private function registerLivewireComponent(): void
     {
         $registrar = $this->app->make(LivewireComponentRegistrar::class);
-        $registrar->register('nuewire::updates', Updates::class);
+        $registrar->register('nuewire-updates', Updates::class);
     }
 
     private function registerPlatformNavigation(): void
@@ -91,7 +91,7 @@ final class InstallerServiceProvider extends ServiceProvider
                     'label' => ['id' => 'Pembaruan', 'en' => 'Updates'],
                     'description' => ['id' => 'Periksa dan perbarui package.', 'en' => 'Check and update packages.'],
                     'group' => ['id' => 'Sistem', 'en' => 'System'],
-                    'component' => 'nuewire::updates',
+                    'component' => 'nuewire-updates',
                     'permission' => 'updates.view',
                     'icon' => 'U',
                     'order' => 900,
@@ -106,7 +106,7 @@ final class InstallerServiceProvider extends ServiceProvider
                 'slug' => 'updates',
                 'label' => ['id' => 'Pembaruan', 'en' => 'Updates'],
                 'description' => ['id' => 'Periksa dan perbarui package.', 'en' => 'Check and update packages.'],
-                'component' => 'nuewire::updates',
+                'component' => 'nuewire-updates',
                 'permission' => 'updates.view',
                 'icon' => 'updates',
                 'order' => 10,

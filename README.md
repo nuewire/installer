@@ -90,7 +90,7 @@ When `nuewire/platform` 2 and Livewire are installed, the installer registers **
 The component can also be mounted directly:
 
 ```blade
-<livewire:nuewire::updates />
+<livewire:nuewire-updates />
 ```
 
 ```php

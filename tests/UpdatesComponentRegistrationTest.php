@@ -12,7 +12,7 @@ final class UpdatesComponentRegistrationTest extends TestCase
     {
         $this->app['config']->set('nuewire.installer.ui.authorization.require_authenticated_user', false);
 
-        Livewire::test('nuewire::updates')
+        Livewire::test('nuewire-updates')
             ->assertSet('locale', 'id');
     }
 }
