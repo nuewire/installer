@@ -87,6 +87,16 @@ return [
             'recommended' => true,
             'order' => 30,
         ],
+        'page' => [
+            'package' => 'nuewire/page',
+            'constraint' => '^1.0',
+            'label' => ['id' => 'Halaman', 'en' => 'Pages'],
+            'description' => ['id' => 'Kelola halaman statis website.', 'en' => 'Manage static website pages.'],
+            'recommended' => true,
+            'requires_features' => ['platform'],
+            'setup_command' => 'nuewire:page:install',
+            'order' => 35,
+        ],
         'logs' => [
             'package' => 'nuewire/logs',
             'constraint' => '^1.0',

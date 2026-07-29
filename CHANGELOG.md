@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0
+
+- Added the `nuewire/page` feature with Platform dependency and setup command.
+- Added static-page package status and update coverage.
+
 ## 2.1.1
 
 - Moved Updates to Settings → Package Management.

@@ -12,10 +12,12 @@ final class FeatureCatalogTest extends TestCase
     {
         $features = app(FeatureCatalog::class)->all('id');
 
-        $this->assertSame(['platform', 'users', 'acl', 'filesystem', 'mail', 'logs', 'backup', 'cache'], array_keys($features));
+        $this->assertSame(['platform', 'users', 'acl', 'filesystem', 'mail', 'page', 'logs', 'backup', 'cache'], array_keys($features));
         $this->assertSame('nuewire/platform', $features['platform']['package']);
         $this->assertSame('^2.1', $features['platform']['constraint']);
         $this->assertSame('nuewire/mail', $features['mail']['package']);
+        $this->assertSame('nuewire/page', $features['page']['package']);
+        $this->assertSame(['platform'], $features['page']['requires_features']);
         $this->assertSame('nuewire/logs', $features['logs']['package']);
         $this->assertSame(['platform'], $features['logs']['requires_features']);
         $this->assertSame('nuewire/backup', $features['backup']['package']);
@@ -28,7 +30,7 @@ final class FeatureCatalogTest extends TestCase
     {
         $features = app(FeatureCatalog::class)->managed('id');
 
-        $this->assertSame(['installer', 'support', 'platform', 'users', 'acl', 'filesystem', 'mail', 'logs', 'backup', 'cache'], array_keys($features));
+        $this->assertSame(['installer', 'support', 'platform', 'users', 'acl', 'filesystem', 'mail', 'page', 'logs', 'backup', 'cache'], array_keys($features));
         $this->assertSame('nuewire/installer', $features['installer']['package']);
         $this->assertSame('nuewire/support', $features['support']['package']);
     }

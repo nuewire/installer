@@ -48,12 +48,13 @@ Users
 ACL
 Filesystem
 Mail
+Pages
 Platform Logs
 Backup
 Cache
 ```
 
-Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. Selecting **Platform Logs** also selects Platform and runs the Activitylog publishing step. Selecting **Backup** also selects Platform and Filesystem, then publishes the Spatie backup configuration. Selecting **Cache** also selects Platform and publishes the Nuewire Cache configuration. After Composer finishes, add the required traits to the host `User` model and run:
+Selecting **Users** also selects Platform. Selecting **ACL** also selects Users and Platform. Selecting **Pages** also selects Platform and registers Content → Website → Pages. Run `php artisan migrate` followed by `php artisan nuewire:page:seed` when setup did not run migrations. Selecting **Platform Logs** also selects Platform and runs the Activitylog publishing step. Selecting **Backup** also selects Platform and Filesystem, then publishes the Spatie backup configuration. Selecting **Cache** also selects Platform and publishes the Nuewire Cache configuration. After Composer finishes, add the required traits to the host `User` model and run:
 
 ```bash
 php artisan nuewire:users:install --migrate --admin=admin@example.com
