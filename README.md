@@ -85,7 +85,7 @@ Instalasi dan update umum mendukung Composer 2.x. Opsi `--patch-only` memerlukan
 
 ## Update page
 
-When `nuewire/platform` 2 and Livewire are installed, the installer registers **Plugin → Package Management → Updates** at `/admin/plugin/updates`. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
+When `nuewire/platform` 2 and Livewire are installed, the installer registers **Settings → Package Management → Updates** at `/admin/settings/updates`. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
 
 The component can also be mounted directly:
 

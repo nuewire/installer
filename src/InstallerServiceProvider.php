@@ -102,7 +102,7 @@ final class InstallerServiceProvider extends ServiceProvider
             }
 
             $registry->register('installer.updates', [
-                'area' => 'plugin',
+                'area' => 'settings',
                 'group' => 'package-management',
                 'slug' => 'updates',
                 'label' => ['id' => 'Pembaruan', 'en' => 'Updates'],
@@ -163,7 +163,7 @@ final class InstallerServiceProvider extends ServiceProvider
                             ['key' => 'version', 'label' => $context->locale === 'en' ? 'Version' : 'Versi'],
                         ],
                         'rows' => $rows,
-                        'url' => $context->route('plugin', 'updates'),
+                        'url' => $context->route('settings', 'updates'),
                     ];
                 },
                 'order' => 10,
@@ -192,7 +192,7 @@ final class InstallerServiceProvider extends ServiceProvider
                     return [
                         'value' => number_format($rate, 0).'%',
                         'meta' => "{$installed} / {$total} ".($context->locale === 'en' ? 'packages installed' : 'package terpasang'),
-                        'url' => $context->route('plugin', 'updates'),
+                        'url' => $context->route('settings', 'updates'),
                     ];
                 },
                 'order' => 20,

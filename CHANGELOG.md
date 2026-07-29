@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1
+
+- Moved Updates to Settings → Package Management.
+- Updated dashboard package widgets to link to the new Settings URL.
+- Kept the previous Plugin URL redirecting through Platform's canonical resolver.
+
 ## 2.1.0
 
 - Added package coverage and installed-version dashboard widgets.
