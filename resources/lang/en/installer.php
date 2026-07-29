@@ -24,6 +24,7 @@ return [
     'ui' => [
         'title' => 'Package updates',
         'subtitle' => 'Check Nuewire package versions.',
+        'source_note' => 'Version checks use GitHub Releases. Installing updates still uses Composer.',
         'check' => 'Check updates',
         'checking' => 'Checking...',
         'update' => 'Update selected',
@@ -37,15 +38,19 @@ return [
         'state' => 'Status',
         'available' => 'Update available',
         'current_state' => 'Current',
-        'composer_note' => 'Composer updates composer.lock and related dependencies.',
+        'composer_note' => 'Installing updates requires Composer to update composer.lock and related dependencies.',
         'output' => 'Process output',
         'status' => [
             'current' => 'All packages are current.',
             'checked' => 'Update check completed.',
             'updated' => 'Packages updated.',
         ],
+        'warnings' => [
+            'partial' => 'Some packages could not be checked through GitHub',
+        ],
         'errors' => [
             'check' => 'Update check failed',
+            'github_unavailable' => 'Release versions could not be retrieved from GitHub. Check connectivity, repository access, or NUEWIRE_GITHUB_TOKEN.',
             'disabled' => 'Web updates are not allowed.',
             'select' => 'Select packages to update.',
             'update' => 'Update failed',

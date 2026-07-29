@@ -89,7 +89,9 @@ Instalasi dan update umum mendukung Composer 2.x. Opsi `--patch-only` memerlukan
 
 ## Update page
 
-When `nuewire/platform` 2 and Livewire are installed, the installer registers **Settings → Package Management → Updates** at `/admin/settings/updates`. The page can check all installed `nuewire/*` packages. Updates are enabled only in the `local` environment by default.
+When `nuewire/platform` 2 and Livewire are installed, the installer registers **Settings → Package Management → Updates** at `/admin/settings/updates`. The page checks installed `nuewire/*` versions through GitHub Releases and falls back to stable repository tags. This check does not require a Composer executable. Installing an update still requires Composer because `composer.lock` and related dependencies must be updated safely. Updates are enabled only in the `local` environment by default.
+
+For private repositories or higher GitHub API limits, configure `NUEWIRE_GITHUB_TOKEN`. `NUEWIRE_GITHUB_OWNER`, `NUEWIRE_GITHUB_API_URL`, and `NUEWIRE_GITHUB_TIMEOUT` are also available.
 
 The component can also be mounted directly:
 

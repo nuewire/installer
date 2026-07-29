@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Check package versions through GitHub Releases with a stable-tag fallback, without invoking `composer outdated`.
+- Added optional `NUEWIRE_GITHUB_TOKEN`, API URL, owner, timeout, and repository override configuration.
+- Composer remains required only when an update is installed.
+
 ## 2.6.0 - 2026-07-29
 
 - Added the `nuewire/hero` and `nuewire/banner` features.

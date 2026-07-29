@@ -24,6 +24,7 @@ return [
     'ui' => [
         'title' => 'Pembaruan package',
         'subtitle' => 'Periksa versi package Nuewire.',
+        'source_note' => 'Pemeriksaan versi menggunakan GitHub Releases. Pemasangan update tetap menggunakan Composer.',
         'check' => 'Periksa update',
         'checking' => 'Memeriksa...',
         'update' => 'Perbarui pilihan',
@@ -37,15 +38,19 @@ return [
         'state' => 'Status',
         'available' => 'Update tersedia',
         'current_state' => 'Terbaru',
-        'composer_note' => 'Composer memperbarui composer.lock dan dependency terkait.',
+        'composer_note' => 'Pemasangan update memerlukan Composer untuk memperbarui composer.lock dan dependency terkait.',
         'output' => 'Output proses',
         'status' => [
             'current' => 'Semua package sudah terbaru.',
             'checked' => 'Pemeriksaan selesai.',
             'updated' => 'Package berhasil diperbarui.',
         ],
+        'warnings' => [
+            'partial' => 'Sebagian package tidak dapat diperiksa melalui GitHub',
+        ],
         'errors' => [
             'check' => 'Pemeriksaan update gagal',
+            'github_unavailable' => 'Versi rilis tidak dapat diperoleh dari GitHub. Periksa koneksi, repository, atau NUEWIRE_GITHUB_TOKEN.',
             'disabled' => 'Update dari UI tidak diizinkan.',
             'select' => 'Pilih package yang akan diperbarui.',
             'update' => 'Pembaruan gagal',

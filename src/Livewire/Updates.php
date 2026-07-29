@@ -10,6 +10,7 @@ use Livewire\Component;
 use Nuewire\Installer\Catalog\FeatureCatalog;
 use Nuewire\Installer\Composer\ComposerRunner;
 use Nuewire\Installer\Support\InstalledPackageInspector;
+use Nuewire\Installer\Updates\GitHubReleaseChecker;
 use Throwable;
 
 final class Updates extends Component
@@ -27,6 +28,7 @@ final class Updates extends Component
     public ?string $checkedAt = null;
     public ?string $status = null;
     public ?string $error = null;
+    public ?string $warning = null;
     public ?string $output = null;
 
     public function mount(FeatureCatalog $catalog, InstalledPackageInspector $inspector): void
@@ -40,20 +42,31 @@ final class Updates extends Component
     public function checkUpdates(
         FeatureCatalog $catalog,
         InstalledPackageInspector $inspector,
-        ComposerRunner $composer,
+        GitHubReleaseChecker $github,
     ): void {
         $this->ensureAuthorized();
         $this->clearMessages();
 
         try {
-            $outdated = $composer->outdated();
-            $inspector->forget();
-            $this->loadPackages($catalog, $inspector, $outdated);
+            $installed = $this->installedVersions($catalog, $inspector);
+            $result = $github->check($installed);
+            $this->loadPackages($catalog, $inspector, $result['packages']);
             $this->checked = true;
             $this->checkedAt = now()->format('Y-m-d H:i:s');
-            $this->status = $outdated === []
-                ? $this->translate('ui.status.current')
-                : $this->translate('ui.status.checked');
+
+            if ($installed !== [] && count($result['failures']) === count($installed)) {
+                $this->error = $this->translate('ui.errors.check').': '.$this->translate('ui.errors.github_unavailable');
+
+                return;
+            }
+
+            $this->status = collect($result['packages'])->contains(
+                static fn (array $package): bool => (bool) ($package['update_available'] ?? false),
+            )
+                ? $this->translate('ui.status.checked')
+                : $this->translate('ui.status.current');
+
+            $this->setPartialWarning(array_keys($result['failures']));
         } catch (Throwable $exception) {
             report($exception);
             $this->error = $this->translate('ui.errors.check').': '.$exception->getMessage();
@@ -64,6 +77,7 @@ final class Updates extends Component
         FeatureCatalog $catalog,
         InstalledPackageInspector $inspector,
         ComposerRunner $composer,
+        GitHubReleaseChecker $github,
     ): void {
         $this->ensureAuthorized('updates.manage');
         $this->clearMessages();
@@ -89,13 +103,13 @@ final class Updates extends Component
             return;
         }
 
-        $arguments = ['update', ...$selected, '--with-all-dependencies', '--no-interaction', '--no-ansi', '--no-progress'];
-
-        if ($composer->supportsMinimalChanges()) {
-            $arguments[] = '--minimal-changes';
-        }
-
         try {
+            $arguments = ['update', ...$selected, '--with-all-dependencies', '--no-interaction', '--no-ansi', '--no-progress'];
+
+            if ($composer->supportsMinimalChanges()) {
+                $arguments[] = '--minimal-changes';
+            }
+
             $result = $composer->runCaptured($arguments, (int) config('nuewire.installer.ui.process_timeout', 600));
             $this->output = $this->limitOutput($result['output']);
 
@@ -124,7 +138,9 @@ final class Updates extends Component
             $this->selected = [];
             $this->checked = true;
             $this->checkedAt = now()->format('Y-m-d H:i:s');
-            $this->loadPackages($catalog, $inspector, $composer->outdated());
+            $check = $github->check($this->installedVersions($catalog, $inspector));
+            $this->loadPackages($catalog, $inspector, $check['packages']);
+            $this->setPartialWarning(array_keys($check['failures']));
             $this->status = $this->translate('ui.status.updated');
         } catch (Throwable $exception) {
             report($exception);
@@ -139,11 +155,11 @@ final class Updates extends Component
         return view('nuewire-installer::livewire.updates');
     }
 
-    /** @param array<string, array<string, mixed>> $outdated */
+    /** @param array<string, array{latest: string, update_available: bool, status: string}> $checks */
     private function loadPackages(
         FeatureCatalog $catalog,
         InstalledPackageInspector $inspector,
-        array $outdated = [],
+        array $checks = [],
     ): void {
         $packages = [];
 
@@ -155,7 +171,7 @@ final class Updates extends Component
                 continue;
             }
 
-            $update = $outdated[$package] ?? null;
+            $check = $checks[$package] ?? null;
 
             $packages[] = [
                 'id' => $id,
@@ -163,13 +179,40 @@ final class Updates extends Component
                 'label' => (string) ($feature['label'] ?? $package),
                 'description' => (string) ($feature['description'] ?? ''),
                 'current' => $current,
-                'latest' => is_array($update) ? (string) ($update['latest'] ?? $current) : $current,
-                'update_available' => is_array($update),
-                'status' => is_array($update) ? (string) ($update['latest-status'] ?? 'update-possible') : 'current',
+                'latest' => is_array($check) ? (string) ($check['latest'] ?? $current) : $current,
+                'update_available' => is_array($check) && (bool) ($check['update_available'] ?? false),
+                'status' => is_array($check) ? (string) ($check['status'] ?? 'current') : 'current',
             ];
         }
 
         $this->packages = $packages;
+    }
+
+    /** @return array<string, string> */
+    private function installedVersions(FeatureCatalog $catalog, InstalledPackageInspector $inspector): array
+    {
+        $installed = [];
+
+        foreach ($catalog->managed($this->locale) as $feature) {
+            $package = (string) ($feature['package'] ?? '');
+            $version = $inspector->version($package);
+
+            if ($package !== '' && $version !== null) {
+                $installed[$package] = $version;
+            }
+        }
+
+        return $installed;
+    }
+
+    /** @param array<int, string> $failures */
+    private function setPartialWarning(array $failures): void
+    {
+        if ($failures === []) {
+            return;
+        }
+
+        $this->warning = $this->translate('ui.warnings.partial').': '.implode(', ', $failures);
     }
 
     private function updatesAreEnabled(): bool
@@ -234,6 +277,7 @@ final class Updates extends Component
     {
         $this->status = null;
         $this->error = null;
+        $this->warning = null;
         $this->output = null;
     }
 

@@ -6,6 +6,15 @@ return [
     'locale' => env('NUEWIRE_INSTALLER_LOCALE', 'id'),
     'composer_binary' => env('NUEWIRE_COMPOSER_BINARY'),
 
+    'github' => [
+        'api_url' => env('NUEWIRE_GITHUB_API_URL', 'https://api.github.com'),
+        'owner' => env('NUEWIRE_GITHUB_OWNER', 'nuewire'),
+        'token' => env('NUEWIRE_GITHUB_TOKEN'),
+        'timeout' => (int) env('NUEWIRE_GITHUB_TIMEOUT', 10),
+        // Optional package => owner/repository overrides.
+        'repositories' => [],
+    ],
+
     'ui' => [
         'enabled' => (bool) env('NUEWIRE_INSTALLER_UI', true),
         'allow_updates' => (bool) env('NUEWIRE_INSTALLER_UI_ALLOW_UPDATES', true),
